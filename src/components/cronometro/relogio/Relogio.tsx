@@ -1,13 +1,22 @@
 import styles from "./Relogio.module.scss";
 
-const Relogio = () => {
+interface RelogioProps {
+  tempo: number | undefined;
+}
+
+const Relogio = ({ tempo = 0 }: RelogioProps) => {
+  const minutos = Math.floor(tempo / 60);
+  const segundos = tempo % 60;
+  const [minutosDezena, minutosUnidades] = String(minutos).padStart(2, "0");
+  const [segundosDezena, segundosUnidade] = String(segundos).padStart(2, "0");
+
   return (
     <>
-      <span className={styles.relogioNumero}>0</span>
-      <span className={styles.relogioNumero}>0</span>
+      <span className={styles.relogioNumero}>{minutosDezena}</span>
+      <span className={styles.relogioNumero}>{minutosUnidades}</span>
       <span className={styles.relogioDivisao}>:</span>
-      <span className={styles.relogioNumero}>0</span>
-      <span className={styles.relogioNumero}>0</span>
+      <span className={styles.relogioNumero}>{segundosDezena}</span>
+      <span className={styles.relogioNumero}>{segundosUnidade}</span>
     </>
   );
 };
